@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduChild</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--teal:#2f8f83;--teal-dark:#267a6f;}
+body{font-family:'Nunito',sans-serif;line-height:1.6;color:#333;overflow-x:hidden;}
+
+/* NAVBAR */
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:15px 70px;background:var(--teal);position:sticky;top:0;z-index:1000;}
+.logo{color:#fff;font-size:21px;font-weight:900;}
+.nav-links{display:flex;list-style:none;gap:24px;}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,.92);font-size:13px;font-weight:600;}
+.nav-links a:hover{color:#fff;}
+.signup-btn{padding:8px 18px;border:2px solid #fff;background:transparent;color:#fff;border-radius:5px;cursor:pointer;font-weight:700;font-size:12.5px;font-family:'Nunito',sans-serif;}
+.signup-btn:hover{background:#fff;color:var(--teal);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{width:23px;height:2px;background:#fff;border-radius:2px;display:block;}
+
+/* HERO */
+.hero{background:var(--teal);color:#fff;padding:55px 70px 65px;display:flex;justify-content:center;align-items:center;gap:30px;position:relative;overflow:hidden;min-height:240px;}
+.hero-deco{position:absolute;pointer-events:none;}
+.deco-tr{top:0;right:45px;width:200px;height:210px;opacity:.2;}
+.deco-bl{bottom:0;left:10px;width:130px;height:110px;opacity:.2;}
+.deco-tl{top:5px;left:55px;width:90px;height:90px;opacity:.2;}
+.deco-re{top:15px;right:0;width:75px;height:175px;opacity:.15;}
+
+.hero-text{flex:1;max-width:440px;position:relative;z-index:2;}
+.hero-text h1{font-size:40px;font-weight:900;line-height:1.2;margin-bottom:14px;}
+.hero-text p{font-size:13.5px;margin-bottom:24px;opacity:.88;line-height:1.75;max-width:380px;}
+.enroll-btn{display:inline-flex;align-items:center;gap:6px;padding:11px 24px;background:#fff;color:var(--teal);border:none;border-radius:6px;cursor:pointer;font-weight:800;font-size:13px;font-family:'Nunito',sans-serif;}
+.enroll-btn::after{content:'→';}
+
+/* hero image cluster */
+.hero-imgs{position:relative;z-index:2;flex-shrink:0;width:360px;height:220px;}
+.img-large{position:absolute;top:0;left:0;width:210px;height:210px;border-radius:50%;overflow:hidden;border:5px solid rgba(255,255,255,.35);}
+.img-large img{width:100%;height:100%;object-fit:cover;display:block;}
+.play-stamp{position:absolute;top:50%;left:198px;transform:translateY(-50%);width:68px;height:68px;border-radius:50%;overflow:hidden;z-index:4;cursor:pointer;border:3px solid rgba(255,255,255,.4);}
+.play-stamp img{width:100%;height:100%;object-fit:cover;display:block;}
+.img-medium{position:absolute;top:22px;right:0;width:162px;height:162px;border-radius:50%;overflow:hidden;border:5px solid rgba(255,255,255,.35);}
+.img-medium img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* FEATURES */
+.features{padding:65px 70px;background:#fff;}
+.feat-inner{display:flex;align-items:flex-start;gap:55px;}
+.feat-left{flex:0 0 255px;}
+.feat-left h2{font-size:29px;font-weight:900;line-height:1.25;margin-bottom:13px;}
+.feat-left p{color:#888;font-size:13px;line-height:1.75;}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;flex:1;}
+.card{background:#fff;padding:20px 15px;border-radius:10px;box-shadow:0 2px 14px rgba(0,0,0,.08);}
+.card-icon{width:44px;height:44px;background:var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:11px;overflow:hidden;}
+.card-icon img{width:24px;height:24px;object-fit:contain;}
+.card h3{font-size:12.5px;font-weight:800;margin-bottom:6px;}
+.card p{font-size:11.5px;color:#888;line-height:1.6;}
+
+/* CONTACT */
+.contact{background:var(--teal);padding:65px 70px;position:relative;overflow:hidden;}
+.contact-inner{display:flex;justify-content:space-between;align-items:center;gap:55px;position:relative;z-index:2;}
+.contact-text{flex:0 0 38%;color:#fff;}
+.contact-text h2{font-size:34px;font-weight:900;line-height:1.2;margin-bottom:13px;}
+.contact-text p{opacity:.88;font-size:13.5px;line-height:1.75;}
+.form-box{flex:1;background:#fff;padding:30px;border-radius:12px;}
+.form-row{display:flex;gap:13px;margin-bottom:12px;}
+.form-box input,.form-box textarea{width:100%;padding:11px 13px;border:1px solid #e0e0e0;border-radius:6px;font-family:'Nunito',sans-serif;font-size:13px;color:#333;outline:none;transition:border-color .2s;}
+.form-box input:focus,.form-box textarea:focus{border-color:var(--teal);}
+.form-box textarea{resize:vertical;min-height:95px;margin-bottom:12px;}
+.form-box button{width:100%;padding:12px;background:var(--teal);color:#fff;border:none;border-radius:6px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;}
+.form-box button:hover{background:var(--teal-dark);}
+
+/* BLOG */
+.blog{padding:65px 70px;background:#fff;}
+.blog>h2{text-align:center;font-size:29px;font-weight:900;margin-bottom:34px;}
+.blog-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.blog-card{
+    max-width:300px; /* adjust as needed */
+    margin:0 auto;
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 2px 14px rgba(0,0,0,.08);
+}
+.blog-card:hover{transform:translateY(-4px);}
+.blog-card img{width:95%;height:250px;object-fit:cover;display:block;}
+.blog-meta{padding:9px 11px 3px;display:flex;align-items:center;gap:7px;}
+.blog-meta .dot{width:20px;height:20px;border-radius:50%;flex-shrink:0;}
+.blog-meta .author{font-size:10.5px;color:#bbb;}
+.blog-meta .date{font-size:10.5px;color:#bbb;margin-left:auto;}
+.blog-card h4{padding:3px 11px 13px;font-size:12px;font-weight:700;line-height:1.5;color:#333;}
+
+/* FOOTER */
+.footer{background:var(--teal);color:#fff;padding:52px 70px 20px;}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:38px;margin-bottom:34px;}
+.footer-col h4{font-size:13.5px;font-weight:800;margin-bottom:13px;}
+.footer-col p,.footer-col a{font-size:12px;opacity:.85;margin-bottom:4px;line-height:1.65;display:block;color:#fff;text-decoration:none;}
+.footer-col a:hover{opacity:1;}
+.lbl{font-weight:800!important;opacity:1!important;margin-top:7px!important;}
+.sub-row{display:flex;margin-top:11px;margin-bottom:16px;}
+.sub-row input{flex:1;padding:9px 13px;border:none;border-radius:20px 0 0 20px;font-family:'Nunito',sans-serif;font-size:11.5px;outline:none;}
+.sub-row button{padding:9px 15px;background:#1d6b61;color:#fff;border:none;border-radius:0 20px 20px 0;font-family:'Nunito',sans-serif;font-size:11.5px;font-weight:700;cursor:pointer;}
+.footer-logo-txt{font-size:17px;font-weight:900;}
+.ft-divider{border:none;border-top:1px solid rgba(255,255,255,.2);margin-bottom:18px;}
+.footer-btm{display:flex;justify-content:space-between;align-items:center;}
+.footer-btm p{font-size:11.5px;opacity:.8;}
+.socials{display:flex;gap:8px;}
+.soc{width:29px;height:29px;border-radius:50%;background:#fff;color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:800;cursor:pointer;}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .navbar{padding:14px 40px;}
+  .hero{padding:48px 40px 58px;}
+  .hero-text h1{font-size:34px;}
+  .hero-imgs{width:300px;height:186px;}
+  .img-large{width:175px;height:175px;}
+  .img-medium{width:138px;height:138px;top:20px;}
+  .play-stamp{left:164px;width:58px;height:58px;}
+  .features{padding:52px 40px;}
+  .feat-inner{flex-direction:column;gap:26px;}
+  .feat-left{flex:unset;width:100%;}
+  .contact{padding:52px 40px;}
+  .blog{padding:52px 40px;}
+  .blog-grid{grid-template-columns:repeat(2,1fr);}
+  .footer{padding:42px 40px 18px;}
+  .footer-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  .navbar{padding:13px 20px;}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:52px;left:0;right:0;background:var(--teal);padding:16px 20px;gap:13px;text-align:center;z-index:999;box-shadow:0 4px 12px rgba(0,0,0,.15);}
+  .nav-links.open{display:flex;}
+  .signup-btn{display:none;}
+  .hamburger{display:flex;}
+  .hero{flex-direction:column;padding:34px 20px 46px;text-align:center;gap:26px;}
+  .hero-text{max-width:100%;}
+  .hero-text h1{font-size:27px;}
+  .hero-text p{max-width:100%;}
+  .hero-imgs{width:260px;height:164px;margin:0 auto;}
+  .img-large{width:155px;height:155px;}
+  .img-medium{width:122px;height:122px;top:18px;}
+  .play-stamp{left:144px;width:52px;height:52px;}
+  .features{padding:42px 20px;}
+  .cards{grid-template-columns:repeat(2,1fr);}
+  .contact{padding:42px 20px;}
+  .contact-inner{flex-direction:column;gap:26px;}
+  .contact-text{flex:unset;width:100%;text-align:center;}
+  .contact-text h2{font-size:25px;}
+  .form-row{flex-direction:column;gap:10px;}
+  .blog{padding:42px 20px;}
+  .blog-grid{grid-template-columns:1fr;max-width:340px;margin:0 auto;}
+  .footer{padding:34px 20px 16px;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:24px;}
+  .footer-btm{flex-direction:column;gap:11px;text-align:center;}
+  .sub-row{flex-direction:column;gap:7px;}
+  .sub-row input{border-radius:20px;}
+  .sub-row button{border-radius:20px;}
+}
+@media(max-width:480px){
+  .hero-text h1{font-size:23px;}
+  .cards{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .hero-imgs{width:230px;height:148px;}
+  .img-large{width:136px;height:136px;}
+  .img-medium{width:108px;height:108px;top:16px;}
+  .play-stamp{left:126px;width:46px;height:46px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">EduChild</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Programs</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Classes</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <button class="signup-btn">Sign Up</button>
+  <div class="hamburger" id="ham" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-deco deco-tr" viewBox="0 0 200 210"><text x="14" y="36" font-size="22" fill="#fff">✦</text><text x="75" y="16" font-size="14" fill="#fff">✦</text><text x="142" y="50" font-size="18" fill="#fff">✦</text><text x="55" y="74" font-size="10" fill="#fff">✦</text><text x="168" y="130" font-size="11" fill="#fff">✦</text><path d="M155,105 Q167,83 177,105 Q187,127 165,120Z" fill="rgba(255,255,255,.6)"/><path d="M22,130 Q33,108 44,130 Q55,152 33,145Z" fill="rgba(255,255,255,.55)"/><g transform="rotate(-45 150 48)" opacity=".4"><rect x="143" y="18" width="13" height="48" rx="2" fill="#fff"/><polygon points="143,66 156,66 149,80" fill="#fff"/></g><g opacity=".3"><rect x="8" y="152" width="58" height="11" rx="2" fill="#fff"/><line x1="18" y1="152" x2="18" y2="163" stroke="rgba(255,255,255,.5)" stroke-width="1"/><line x1="28" y1="152" x2="28" y2="163" stroke="rgba(255,255,255,.5)" stroke-width="1"/><line x1="38" y1="152" x2="38" y2="163" stroke="rgba(255,255,255,.5)" stroke-width="1"/><line x1="48" y1="152" x2="48" y2="163" stroke="rgba(255,255,255,.5)" stroke-width="1"/></g></svg>
+  <svg class="hero-deco deco-bl" viewBox="0 0 130 110"><path d="M6,100 Q28,8 95,18 Q52,62 6,100Z" fill="rgba(255,255,255,.7)"/><path d="M40,100 Q56,50 96,28" stroke="rgba(255,255,255,.5)" stroke-width="1.5" fill="none"/><text x="5" y="52" font-size="13" fill="#fff" opacity=".6">✦</text><text x="60" y="28" font-size="9" fill="#fff" opacity=".5">✦</text></svg>
+  <svg class="hero-deco deco-tl" viewBox="0 0 90 90"><text x="4" y="26" font-size="11" fill="#fff">✦</text><text x="36" y="50" font-size="8" fill="#fff">✦</text><text x="60" y="22" font-size="10" fill="#fff">✦</text></svg>
+  <svg class="hero-deco deco-re" viewBox="0 0 75 175"><path d="M68,8 Q8,48 18,158 Q48,98 68,8Z" fill="rgba(255,255,255,.6)"/><path d="M66,10 Q38,78 20,156" stroke="rgba(255,255,255,.4)" stroke-width="1.2" fill="none"/></svg>
+
+  <div class="hero-text">
+    <h1>Early Childhood Care &amp; Education</h1>
+    <p>Quis at eu incididunt tempor id velit eget. Consectetur et lorem ipsum eget faucibus. Nullam tempus malesuada lorem ipsum dolor sit amet.</p>
+    <button class="enroll-btn">Enroll Now</button>
+  </div>
+
+  <div class="hero-imgs">
+    <div class="img-large">
+      <img src="images/hero1.png" alt="Teacher and child">
+    </div>
+    <div class="play-stamp">
+      <img src="images/hero3.png" alt="Watch video">
+    </div>
+    <div class="img-medium">
+      <img src="images/hero2.png" alt="Child smiling">
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="feat-inner">
+    <div class="feat-left">
+      <h2>Providing Good Qualities For Your Loving Kids</h2>
+      <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon"><img src="images/hero4.png" alt="Best Teachers"></div>
+        <h3>Best Teachers</h3>
+        <p>Our experienced teachers help children learn effectively and joyfully every day.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><img src="images/hero5.png" alt="Music Training"></div>
+        <h3>Music Training</h3>
+        <p>Music activities improve creativity, confidence and emotional expression.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><img src="images/hero6.png" alt="Sports Training"></div>
+        <h3>Sports Training</h3>
+        <p>Physical activities support healthy growth and teamwork skills in children.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><img src="images/hero7.png" alt="Practical Learning"></div>
+        <h3>Practical Learning</h3>
+        <p>Learning through hands-on activities makes education enjoyable and memorable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <svg class="hero-deco" style="top:-15px;right:50px;width:170px;height:170px;opacity:.18;" viewBox="0 0 170 170"><text x="16" y="36" font-size="20" fill="#fff">✦</text><text x="85" y="20" font-size="13" fill="#fff">✦</text><text x="135" y="65" font-size="16" fill="#fff">✦</text><path d="M142,115 Q153,93 162,115 Q171,137 151,130Z" fill="rgba(255,255,255,.6)"/><g transform="rotate(-40 128 38)" opacity=".35"><rect x="122" y="8" width="12" height="44" rx="2" fill="#fff"/><polygon points="122,52 134,52 128,66" fill="#fff"/></g></svg>
+  <svg class="hero-deco" style="bottom:-5px;left:20px;width:120px;height:95px;opacity:.18;" viewBox="0 0 120 95"><path d="M5,85 Q25,8 85,16 Q46,54 5,85Z" fill="rgba(255,255,255,.7)"/><path d="M36,90 Q52,46 90,24" stroke="rgba(255,255,255,.5)" stroke-width="1.4" fill="none"/><text x="5" y="42" font-size="12" fill="#fff" opacity=".6">✦</text></svg>
+  <div class="contact-inner">
+    <div class="contact-text">
+      <h2>Join Us And Stay Tuned!</h2>
+      <p>Submit your details and we will contact you soon. Consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+    </div>
+    <div class="form-box">
+      <div class="form-row">
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Your Email">
+      </div>
+      <textarea placeholder="Message" rows="5"></textarea>
+      <button type="submit">Send a Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog">
+  <h2>Latest Blog &amp; Articles</h2>
+  <div class="blog-grid">
+    <div class="blog-card">
+      <img src="images/blog1.png" alt="Blog 1">
+      <div class="blog-meta"><div class="dot" style="background:#81c784;"></div><span class="author">By: Lorem Doe</span><span class="date">24 Jan 2022</span></div>
+      <h4>Back To School: Cute Ideas School Goals Setting for Fresh Start</h4>
+    </div>
+    <div class="blog-card">
+      <img src="images/blog2.png" alt="Blog 2">
+      <div class="blog-meta"><div class="dot" style="background:#f48fb1;"></div><span class="author">By: Lorem Doe</span><span class="date">24 Jan 2022</span></div>
+      <h4>Little Girl Goes To The Home Mary School</h4>
+    </div>
+    <div class="blog-card">
+      <img src="images/blog3.png" alt="Blog 3">
+      <div class="blog-meta"><div class="dot" style="background:#90caf9;"></div><span class="author">By: Lorem Doe</span><span class="date">24 Jan 2022</span></div>
+      <h4>Happy Teenagers In The New Ground Floor Photo</h4>
+    </div>
+    <div class="blog-card">
+      <img src="images/blog4.png" alt="Blog 4">
+      <div class="blog-meta"><div class="dot" style="background:#f06292;"></div><span class="author">By: Lorem Doe</span><span class="date">24 Jan 2022</span></div>
+      <h4>Group Of Children With Color Holi Festival</h4>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <p class="lbl">Call Us</p><p>+123 456 7890</p>
+      <p class="lbl">School Hours</p><p>Mon – Fri: 8 AM – 5 PM</p>
+      <p class="lbl">Location</p><p>California, Los Angeles USA</p>
+    </div>
+    <div class="footer-col">
+      <h4>Useful Links</h4>
+      <a href="#">Online Class</a><a href="#">Upcoming Events</a><a href="#">Appointment</a><a href="#">Online Exam</a><a href="#">Event</a>
+    </div>
+    <div class="footer-col">
+      <h4>Help &amp; Support</h4>
+      <a href="#">Facebook Group</a><a href="#">Customer Service</a><a href="#">Forum</a><a href="#">Youtube</a>
+    </div>
+    <div class="footer-col">
+      <h4>Subscribe</h4>
+      <p>Subscribe To Our Newsletter</p>
+      <div class="sub-row">
+        <input type="email" placeholder="Enter your Email">
+        <button>Subscribe</button>
+      </div>
+      <div class="footer-logo-txt">EduChild</div>
+    </div>
+  </div>
+  <hr class="ft-divider">
+  <div class="footer-btm">
+    <p>© 2022 EduChild – All Rights Reserved</p>
+    <div class="socials">
+      <div class="soc">f</div><div class="soc">t</div><div class="soc">in</div><div class="soc">ig</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+document.addEventListener('click',function(e){var n=document.getElementById('navLinks'),h=document.getElementById('ham');if(!n.contains(e.target)&&!h.contains(e.target))n.classList.remove('open');});
+</script>
+</body>
+</html>
